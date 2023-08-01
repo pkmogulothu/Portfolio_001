@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Move Mini Circle</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <style>
+    .circle {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background-color: lightblue;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    #minicircle {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: orange;
+      border-radius: 50%;
+      
+    }
+  </style>
+</head>
+<body>
+  <div class="circle">
+    <div id="minicircle"></div>
+  </div>
+
+  <script>
+    var $circle = document.querySelector('.circle');
+    var $miniCircle = document.getElementById('minicircle');
+
+    function moveCircle(e) {
+      var circleWidth = $circle.clientWidth;
+      var circleHeight = $circle.clientHeight;
+      var miniCircleWidth = $miniCircle.clientWidth;
+      var miniCircleHeight = $miniCircle.clientHeight;
+
+      // Calculate the position of the mini circle relative to the center of the circle
+      var left = e.pageX - $circle.offsetLeft - miniCircleWidth / 2;
+      var top = e.pageY - $circle.offsetTop - miniCircleHeight / 2;
+
+      // Ensure the mini circle stays within the bounds of the circle
+      left = Math.max(Math.min(left, circleWidth - miniCircleWidth), 0);
+      top = Math.max(Math.min(top, circleHeight - miniCircleHeight), 0);
+
+      gsap.to($miniCircle, { duration: 0.3, left: left, top: top });
+    }
+
+    $circle.addEventListener('mousemove', moveCircle);
+  </script>
+</body>
+</html>

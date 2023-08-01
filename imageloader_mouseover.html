@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Cursor with Image Preloading</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .element {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem;
+      width: 100%;
+      border-top: 1px solid #888;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .element h1 {
+      text-transform: uppercase;
+      font-size: 8vw;
+      opacity: 0.7;
+    }
+
+    /* CSS for custom cursor */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      display: none;
+      width: 250px;
+      height: 250px;
+      transform-origin: center; /* Set the rotation origin to the center of the cursor */
+    }
+
+    .custom-cursor img {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="element">
+    <h1>The Pug</h1>
+    <h5>2022</h5>
+  </div>
+  <div class="element">
+    <h1>ixperience</h1>
+    <h5>2022</h5>
+  </div>
+  <div class="element">
+    <h1>hudu</h1>
+    <h5>2021</h5>
+  </div>
+
+  <!-- Hidden image element to preload images -->
+  <img id="imagePreloader" style="display: none;" src="./plug.png" alt="" />
+  <img id="imagePreloader2" style="display: none;" src="./ixperience.png" alt="" />
+  <img id="imagePreloader3" style="display: none;" src="./hudu.png" alt="" />
+
+  <!-- Custom cursor element -->
+  <div class="custom-cursor"></div>
+  <div id="minicircle"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script>
+    // Preload images
+    function preloadImages() {
+      var imagePreloader = document.getElementById("imagePreloader");
+      var imagePreloader2 = document.getElementById("imagePreloader2");
+      var imagePreloader3 = document.getElementById("imagePreloader3");
+
+      var imageSources = [
+        imagePreloader.src,
+        imagePreloader2.src,
+        imagePreloader3.src,
+      ];
+
+      imageSources.forEach(function (src) {
+        var img = new Image();
+        img.src = src;
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", preloadImages);
+
+    // Attach loaded images as custom cursor and rotate based on cursor movement
+    function attachImagesToCursor() {
+      var elements = document.querySelectorAll(".element");
+      var cursorImages = [
+        document.getElementById("imagePreloader").src,
+        document.getElementById("imagePreloader2").src,
+        document.getElementById("imagePreloader3").src,
+      ];
+
+      var customCursor = document.querySelector(".custom-cursor");
+      var mouseX = 0; // Track mouse X position
+
+      elements.forEach(function (element, index) {
+        element.addEventListener("mouseenter", function () {
+          customCursor.style.display = "block";
+          customCursor.innerHTML = `<img src="${cursorImages[index]}" alt="Cursor Image">`;
+        });
+
+        element.addEventListener("mouseleave", function () {
+          customCursor.style.display = "none";
+        });
+      });
+
+      // Update custom cursor position and rotation on mouse move
+      window.addEventListener("mousemove", function (event) {
+        customCursor.style.left = event.clientX - customCursor.offsetWidth / 2 + "px";
+        customCursor.style.top = event.clientY - customCursor.offsetHeight / 2 + "px";
+
+        // Calculate the rotation angle based on mouse X position relative to the window width
+        var windowWidth = window.innerWidth;
+        var rotationAmount = -1 * (event.clientX / windowWidth - 0.5) * 60; // Reverse rotation and adjust sensitivity (here 60 is used)
+
+        gsap.to(customCursor, {
+          rotation: rotationAmount,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+
+        // Store mouse X position for later use
+        mouseX = event.clientX;
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", attachImagesToCursor);
+
+    // Follow mouse cursor
+    function circleMouseFollower() {
+      var minicircle = document.querySelector("#minicircle");
+      var scaleX = 1;
+      var scaleY = 1;
+
+      gsap.set(minicircle, { xPercent: -50, yPercent: -50, scaleX: scaleX, scaleY: scaleY });
+
+      var resetTimeout;
+
+      function updateCircleTransform(dets) {
+        var xPos = dets.clientX;
+        var yPos = dets.clientY;
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+
+        scaleX = gsap.utils.clamp(0.5, 1.5, xPos / width);
+        scaleY = gsap.utils.clamp(0.5, 1.5, yPos / height);
+
+        gsap.to(minicircle, {
+          duration: 0.3,
+          ease: "power2.out",
+          scaleX: scaleX,
+          scaleY: scaleY,
+          x: xPos,
+          y: yPos,
+        });
+
+        // Clear previous timeout and set a new one to reset minicircle size after 300ms
+        clearTimeout(resetTimeout);
+        resetTimeout = setTimeout(function() {
+          gsap.to(minicircle, {
+            duration: 0.3,
+            ease: "power2.out",
+            scaleX: 1,
+            scaleY: 1,
+          });
+        }, 300);
+      }
+
+      window.addEventListener("mousemove", function(dets) {
+        clearTimeout(resetTimeout);
+        updateCircleTransform(dets);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", circleMouseFollower);
+  </script>
+</body>
+</html>
