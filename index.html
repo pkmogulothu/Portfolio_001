@@ -7,6 +7,9 @@
     <script  src="/locomotive-scroll.js"></script>
     <script  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
         <script src="script.js" ></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -19,12 +22,14 @@
     <div id="main">
         <div id="hero">
         <div id="nav">
-          <a href="#">Cynthia Ugwu</a>
+          <a href="#">PK</a>
+          <div style="background-color: rgb(84, 84, 84);">
           <h4>MENU+</h4>
+        </div>
         </div>
         <div id="heading">
             <div class="bounding">
-                <h1 class="boundingele" >Product</h1>
+                <h1 class="boundingele" >Web</h1>
             </div>
           
           <div class="blocktext">
@@ -32,24 +37,24 @@
                 <h1 class="boundingele" id="secondh1">&nbsp&nbsp Designer</h1>
             </div>
             <div class="bounding">
-                <h5 class="boundingele" >Based in Toronto</h5>
+                <h5 class="boundingele" >and developer</h5>
             </div>
             </div>
         </div>
         <div id="chotiheadings">
             <div class="bounding">
-                <h5 class="boundingele" >available for freelance</h5>
+                <h5 class="boundingele" >Human centered design</h5>
             </div>
             <div class="bounding">
-                <h5 class="boundingele" >work from may 23/h5>
+                <h5 class="boundingele" >with machine perfection</h5>
             </div>          
         </div>
         <div id="herofooter">
           <a href="#"
-            >previously worked yml <i class="ri-arrow-right-up-line"></i
+            >Designs <i class="ri-arrow-right-up-line"></i
           ></a>
           <a href="#"
-            >protopie ambassador <i class="ri-arrow-right-up-line"></i
+            >Developments <i class="ri-arrow-right-up-line"></i
           ></a>
           <div id="iconset">
             <div class="circles"><i class="ri-arrow-down-line"></i></div>
@@ -60,54 +65,49 @@
         <div id="second">
         <div class="element">
           
-          <h1>The Pug</h1>
-          <h5>2022</h5>
+          <h1>Layouts</h1>
+          <h5>take you in</h5>
         </div>
         <div class="element">
           
-          <h1>ixperience</h1>
-          <h5>2022</h5>
+          <h1>xperience</h1>
+          <h5>is all fun</h5>
         </div>
         <div class="element">
           
-          <h1>hudu</h1>
-          <h5>2021</h5>
+          <h1>functionality</h1>
+          <h5>makes you win</h5>
         </div>
         
-  <div class="custom-cursor"></div>
+  <!-- <div class="custom-cursor"></div> -->
         </div>
         <div id="about">
             <div id="imgabt" class="element">
-          <img src="./cynthia.png" alt="" />
+          <img src="./xplore.jpg" alt="" class="round" />
             </div>
             <div id="txtabt">
           <h5>(ABOUT ME)</h5>
           <p>
-            I'm a product designer with a passion for creating products that not
-            only look good but also solve real problems. When I'm not sketching
-            ideas on paper, you can find me binge-watching a Netflix series or
-            playing video games. My design philosophy is simple: make it
-            visually appealing, functional, and bring a smile to people's faces.
-            I'm the designer you want on your team if you want to make people
-            say 'I need that in my life!'.
+            As a visualizer and developer who values approachability and practicality, ideas constantly flow as I sketch and immerse myself in books or watch Netflix. My design approach is simple: fuse visual appeal with real-world functionality to create products that seamlessly integrate into daily life. If your aim is to develop designs with a meaningful impact, I'm the right fit for your team. Let's turn concepts into captivating realities.
           </p>
-          <a href="">Let's talk</a>
+          <a href="https://api.whatsapp.com/send?phone=919390474777&text=Hello this is the starting message"  target="_blank">Let's talk</a>
             </div>
         </div>
-        <div id="sub">
+        <!-- <div id="sub">
             <h5>(forgot to mention) </h5>
             <h3>SUBSCRIBE TO MY YOUTUBE CHANNEL<i class="ri-arrow-down-line"></i></h3>
-        </div>
+        </div> -->
         <div id="footer">
             <div id="foot-l">
                 <h5>2023 ©</h5>
-                <h5>09:10 am IST</h5>
+                <p><span id='date-time'></span></p>
             </div>
             <div id="foot-r">
-                <a href="">dribble</a>
-                <a href="">instagram</a>
-                <a href="">linkedin</a>
-                <a href="">twitter</a>
+              <a href="mailto:prematrix@gmail.com">Email</a>
+                <!-- <a href="">dribble</a> -->
+                <!-- <a href="https://www.instagram.com/mogulothuprem/" target="_blank">instagram</a> -->
+                <a href="https://www.linkedin.com/in/prem-kishore-mogulothu-a851384b/" target="_blank">linkedin</a>
+                <!-- <a href="">twitter</a> -->
             </div>
         </div>
     </div>
@@ -149,7 +149,8 @@
 firstPageAnim();
 
 
-
+var dt = new Date();
+document.getElementById('date-time').innerHTML=dt;
 
     </script>
 
