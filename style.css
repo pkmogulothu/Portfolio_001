@@ -196,7 +196,7 @@ html,body {
       transform-origin: center; /* Set the rotation origin to the center of the cursor */
       /* Add position: absolute to ensure it follows the cursor's position */
       position: absolute;
-      pointer-events: none;
+      
       transform: translate(-50%, -50%);
     }
 
@@ -221,17 +221,17 @@ html,body {
 #about {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: wrap;
     gap: 50px;
     padding: 5vw 5vw;
-    padding-left: 40vw;
+    padding-left: 20vw;
     width: 100%;
     background-color: #000000;
     color: #ffffff;
 }
 
 #about img {
-    width: 250px;
+    width: 25vw;
 }
 
 #txtabt h5 {
